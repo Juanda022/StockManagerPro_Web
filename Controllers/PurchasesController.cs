@@ -12,12 +12,12 @@ namespace StockManager.Controllers
 {
     public class PurchasesController : Controller
     {
-        private DBStockManagerEntities db = new DBStockManagerEntities();
+        private DBStockManagerEntities2 db = new DBStockManagerEntities2();
 
         // GET: Purchases
         public ActionResult Index()
         {
-            var purchases = db.Purchases.Include(p => p.Employee).Include(p => p.OrderProducts).Include(p => p.Supplier);
+            var purchases = db.Purchases.Include(p => p.Employee).Include(p => p.Supplier);
             return View(purchases.ToList());
         }
 
@@ -40,7 +40,6 @@ namespace StockManager.Controllers
         public ActionResult Create()
         {
             ViewBag.EmployeeID = new SelectList(db.Employee, "EmployeeID", "Name");
-            ViewBag.OrderProductsID = new SelectList(db.OrderProducts, "OrderProductsID", "OrderProductsID");
             ViewBag.SupplierID = new SelectList(db.Supplier, "SupplierID", "Name");
             return View();
         }
@@ -50,7 +49,7 @@ namespace StockManager.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PurchaseID,SupplierID,OrderProductsID,PurchaseDate,TotalAmount,EmployeeID")] Purchases purchases)
+        public ActionResult Create([Bind(Include = "PurchaseID,SupplierID,PurchaseDate,TotalAmount,EmployeeID")] Purchases purchases)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +59,6 @@ namespace StockManager.Controllers
             }
 
             ViewBag.EmployeeID = new SelectList(db.Employee, "EmployeeID", "Name", purchases.EmployeeID);
-            ViewBag.OrderProductsID = new SelectList(db.OrderProducts, "OrderProductsID", "OrderProductsID", purchases.OrderProductsID);
             ViewBag.SupplierID = new SelectList(db.Supplier, "SupplierID", "Name", purchases.SupplierID);
             return View(purchases);
         }
@@ -78,7 +76,6 @@ namespace StockManager.Controllers
                 return HttpNotFound();
             }
             ViewBag.EmployeeID = new SelectList(db.Employee, "EmployeeID", "Name", purchases.EmployeeID);
-            ViewBag.OrderProductsID = new SelectList(db.OrderProducts, "OrderProductsID", "OrderProductsID", purchases.OrderProductsID);
             ViewBag.SupplierID = new SelectList(db.Supplier, "SupplierID", "Name", purchases.SupplierID);
             return View(purchases);
         }
@@ -88,7 +85,7 @@ namespace StockManager.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PurchaseID,SupplierID,OrderProductsID,PurchaseDate,TotalAmount,EmployeeID")] Purchases purchases)
+        public ActionResult Edit([Bind(Include = "PurchaseID,SupplierID,PurchaseDate,TotalAmount,EmployeeID")] Purchases purchases)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +94,6 @@ namespace StockManager.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.EmployeeID = new SelectList(db.Employee, "EmployeeID", "Name", purchases.EmployeeID);
-            ViewBag.OrderProductsID = new SelectList(db.OrderProducts, "OrderProductsID", "OrderProductsID", purchases.OrderProductsID);
             ViewBag.SupplierID = new SelectList(db.Supplier, "SupplierID", "Name", purchases.SupplierID);
             return View(purchases);
         }

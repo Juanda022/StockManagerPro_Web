@@ -47,7 +47,6 @@
     <Property Name="Quantity" Type="Int32" />
     <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
     <NavigationProperty Name="Product" Relationship="Self.FK__OrderProd__Produ__412EB0B6" FromRole="OrderProducts" ToRole="Product" />
-    <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchases__Order__44FF419A" FromRole="OrderProducts" ToRole="Purchases" />
   </EntityType>
   <EntityType Name="OrderProductsSale">
     <Key>
@@ -59,7 +58,6 @@
     <Property Name="Quantity" Type="Int32" />
     <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
     <NavigationProperty Name="Product" Relationship="Self.FK__OrderProd__Produ__48CFD27E" FromRole="OrderProductsSale" ToRole="Product" />
-    <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__OrderProd__4CA06362" FromRole="OrderProductsSale" ToRole="Sales" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -79,12 +77,10 @@
     </Key>
     <Property Name="PurchaseID" Type="Int32" Nullable="false" />
     <Property Name="SupplierID" Type="Int32" />
-    <Property Name="OrderProductsID" Type="Int32" Nullable="false" />
     <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
     <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="EmployeeID" Type="Int32" />
     <NavigationProperty Name="Employee" Relationship="Self.FK__Purchases__Emplo__45F365D3" FromRole="Purchases" ToRole="Employee" />
-    <NavigationProperty Name="OrderProducts" Relationship="Self.FK__Purchases__Order__44FF419A" FromRole="Purchases" ToRole="OrderProducts" />
     <NavigationProperty Name="Supplier" Relationship="Self.FK__Purchases__Suppl__440B1D61" FromRole="Purchases" ToRole="Supplier" />
   </EntityType>
   <EntityType Name="Sales">
@@ -93,13 +89,11 @@
     </Key>
     <Property Name="SaleID" Type="Int32" Nullable="false" />
     <Property Name="CustomerID" Type="Int32" />
-    <Property Name="OrderProductsSaleID" Type="Int32" Nullable="false" />
     <Property Name="SaleDate" Type="DateTime" Precision="0" />
     <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="EmployeeID" Type="Int32" />
     <NavigationProperty Name="Customer" Relationship="Self.FK__Sales__CustomerI__4BAC3F29" FromRole="Sales" ToRole="Customer" />
     <NavigationProperty Name="Employee" Relationship="Self.FK__Sales__EmployeeI__4D94879B" FromRole="Sales" ToRole="Employee" />
-    <NavigationProperty Name="OrderProductsSale" Relationship="Self.FK__Sales__OrderProd__4CA06362" FromRole="Sales" ToRole="OrderProductsSale" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -205,18 +199,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Purchases__Order__44FF419A">
-    <End Role="OrderProducts" Type="Self.OrderProducts" Multiplicity="1" />
-    <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrderProducts">
-        <PropertyRef Name="OrderProductsID" />
-      </Principal>
-      <Dependent Role="Purchases">
-        <PropertyRef Name="OrderProductsID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__OrderProd__Produ__48CFD27E">
     <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="OrderProductsSale" Type="Self.OrderProductsSale" Multiplicity="*" />
@@ -226,18 +208,6 @@
       </Principal>
       <Dependent Role="OrderProductsSale">
         <PropertyRef Name="ProductID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Sales__OrderProd__4CA06362">
-    <End Role="OrderProductsSale" Type="Self.OrderProductsSale" Multiplicity="1" />
-    <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrderProductsSale">
-        <PropertyRef Name="OrderProductsSaleID" />
-      </Principal>
-      <Dependent Role="Sales">
-        <PropertyRef Name="OrderProductsSaleID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -253,7 +223,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DBStockManagerEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="DBStockManagerEntities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Customer" EntityType="Self.Customer" />
     <EntitySet Name="EdibleMovements" EntityType="Self.EdibleMovements" />
     <EntitySet Name="Employee" EntityType="Self.Employee" />
@@ -292,17 +262,9 @@
       <End Role="Product" EntitySet="Product" />
       <End Role="OrderProducts" EntitySet="OrderProducts" />
     </AssociationSet>
-    <AssociationSet Name="FK__Purchases__Order__44FF419A" Association="Self.FK__Purchases__Order__44FF419A">
-      <End Role="OrderProducts" EntitySet="OrderProducts" />
-      <End Role="Purchases" EntitySet="Purchases" />
-    </AssociationSet>
     <AssociationSet Name="FK__OrderProd__Produ__48CFD27E" Association="Self.FK__OrderProd__Produ__48CFD27E">
       <End Role="Product" EntitySet="Product" />
       <End Role="OrderProductsSale" EntitySet="OrderProductsSale" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Sales__OrderProd__4CA06362" Association="Self.FK__Sales__OrderProd__4CA06362">
-      <End Role="OrderProductsSale" EntitySet="OrderProductsSale" />
-      <End Role="Sales" EntitySet="Sales" />
     </AssociationSet>
     <AssociationSet Name="FK__Purchases__Suppl__440B1D61" Association="Self.FK__Purchases__Suppl__440B1D61">
       <End Role="Supplier" EntitySet="Supplier" />

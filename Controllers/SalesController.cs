@@ -12,12 +12,12 @@ namespace StockManager.Controllers
 {
     public class SalesController : Controller
     {
-        private DBStockManagerEntities db = new DBStockManagerEntities();
+        private DBStockManagerEntities2 db = new DBStockManagerEntities2();
 
         // GET: Sales
         public ActionResult Index()
         {
-            var sales = db.Sales.Include(s => s.Customer).Include(s => s.Employee).Include(s => s.OrderProductsSale);
+            var sales = db.Sales.Include(s => s.Customer).Include(s => s.Employee);
             return View(sales.ToList());
         }
 
@@ -41,7 +41,6 @@ namespace StockManager.Controllers
         {
             ViewBag.CustomerID = new SelectList(db.Customer, "CustomerID", "Name");
             ViewBag.EmployeeID = new SelectList(db.Employee, "EmployeeID", "Name");
-            ViewBag.OrderProductsSaleID = new SelectList(db.OrderProductsSale, "OrderProductsSaleID", "OrderProductsSaleID");
             return View();
         }
 
@@ -50,7 +49,7 @@ namespace StockManager.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SaleID,CustomerID,OrderProductsSaleID,SaleDate,TotalAmount,EmployeeID")] Sales sales)
+        public ActionResult Create([Bind(Include = "SaleID,CustomerID,SaleDate,TotalAmount,EmployeeID")] Sales sales)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +60,6 @@ namespace StockManager.Controllers
 
             ViewBag.CustomerID = new SelectList(db.Customer, "CustomerID", "Name", sales.CustomerID);
             ViewBag.EmployeeID = new SelectList(db.Employee, "EmployeeID", "Name", sales.EmployeeID);
-            ViewBag.OrderProductsSaleID = new SelectList(db.OrderProductsSale, "OrderProductsSaleID", "OrderProductsSaleID", sales.OrderProductsSaleID);
             return View(sales);
         }
 
@@ -79,7 +77,6 @@ namespace StockManager.Controllers
             }
             ViewBag.CustomerID = new SelectList(db.Customer, "CustomerID", "Name", sales.CustomerID);
             ViewBag.EmployeeID = new SelectList(db.Employee, "EmployeeID", "Name", sales.EmployeeID);
-            ViewBag.OrderProductsSaleID = new SelectList(db.OrderProductsSale, "OrderProductsSaleID", "OrderProductsSaleID", sales.OrderProductsSaleID);
             return View(sales);
         }
 
@@ -88,7 +85,7 @@ namespace StockManager.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SaleID,CustomerID,OrderProductsSaleID,SaleDate,TotalAmount,EmployeeID")] Sales sales)
+        public ActionResult Edit([Bind(Include = "SaleID,CustomerID,SaleDate,TotalAmount,EmployeeID")] Sales sales)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +95,6 @@ namespace StockManager.Controllers
             }
             ViewBag.CustomerID = new SelectList(db.Customer, "CustomerID", "Name", sales.CustomerID);
             ViewBag.EmployeeID = new SelectList(db.Employee, "EmployeeID", "Name", sales.EmployeeID);
-            ViewBag.OrderProductsSaleID = new SelectList(db.OrderProductsSale, "OrderProductsSaleID", "OrderProductsSaleID", sales.OrderProductsSaleID);
             return View(sales);
         }
 

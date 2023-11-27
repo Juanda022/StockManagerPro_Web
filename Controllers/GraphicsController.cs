@@ -10,7 +10,7 @@ namespace StockManagerPro_Web.Controllers
 {
     public class GraphicsController : Controller
     {
-        DBStockManagerEntities graphicDB = new DBStockManagerEntities();
+        DBStockManagerEntities2 graphicDB = new DBStockManagerEntities2();
         // GET: Graphics
         public ActionResult Graphic()
         {

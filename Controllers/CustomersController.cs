@@ -13,7 +13,7 @@ namespace StockManager.Controllers
 {
     public class CustomersController : Controller
     {
-        private DBStockManagerEntities db = new DBStockManagerEntities();
+        private DBStockManagerEntities2 db = new DBStockManagerEntities2();
 
         [ValidateSession]
         // GET: Customers

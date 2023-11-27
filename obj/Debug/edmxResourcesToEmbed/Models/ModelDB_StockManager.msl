@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DBStockManagerModelStoreContainer" CdmEntityContainer="DBStockManagerEntities">
+  <EntityContainerMapping StorageEntityContainer="DBStockManagerModelStoreContainer" CdmEntityContainer="DBStockManagerEntities2">
     <EntitySetMapping Name="Customer">
       <EntityTypeMapping TypeName="DBStockManagerModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
@@ -71,7 +71,6 @@
         <MappingFragment StoreEntitySet="Purchases">
           <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-          <ScalarProperty Name="OrderProductsID" ColumnName="OrderProductsID" />
           <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
           <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
           <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
@@ -83,7 +82,6 @@
         <MappingFragment StoreEntitySet="Sales">
           <ScalarProperty Name="SaleID" ColumnName="SaleID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-          <ScalarProperty Name="OrderProductsSaleID" ColumnName="OrderProductsSaleID" />
           <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
           <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
           <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />

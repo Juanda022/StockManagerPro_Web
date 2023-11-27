@@ -13,7 +13,7 @@ namespace StockManagerPro_Web.Controllers
 {
     public class ReporteVentasController : Controller
     {
-        /*DBStockManagerEntities dbdatos = new DBStockManagerEntities();
+        /*DBStockManagerEntities2 dbdatos = new DBStockManagerEntities2();
         public ActionResult VistaVentas(DateTime? fechaInicio, DateTime? fechaFin)
         {
             LocalReport reporte = new LocalReport();

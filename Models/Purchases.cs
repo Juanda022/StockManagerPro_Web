@@ -16,13 +16,11 @@ namespace StockManager.Models
     {
         public int PurchaseID { get; set; }
         public Nullable<int> SupplierID { get; set; }
-        public int OrderProductsID { get; set; }
         public Nullable<System.DateTime> PurchaseDate { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
         public Nullable<int> EmployeeID { get; set; }
     
         public virtual Employee Employee { get; set; }
-        public virtual OrderProducts OrderProducts { get; set; }
         public virtual Supplier Supplier { get; set; }
     }
 }

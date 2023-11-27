@@ -217,8 +217,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\ModelDB_StockManager.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelDB_StockManager.Context.cs</LastGenOutput>
       <DependentUpon>ModelDB_StockManager.edmx</DependentUpon>
+      <LastGenOutput>ModelDB_StockManager.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ModelDB_StockManager.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

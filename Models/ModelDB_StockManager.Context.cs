@@ -13,10 +13,10 @@ namespace StockManager.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBStockManagerEntities : DbContext
+    public partial class DBStockManagerEntities2 : DbContext
     {
-        public DBStockManagerEntities()
-            : base("name=DBStockManagerEntities")
+        public DBStockManagerEntities2()
+            : base("name=DBStockManagerEntities2")
         {
         }
     

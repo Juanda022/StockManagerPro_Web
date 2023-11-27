@@ -7,13 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StockManager.Models;
+using StockManagerPro_Web.Permissions;
 
 namespace StockManager.Controllers
 {
     public class OrderProductsController : Controller
     {
-        private DBStockManagerEntities db = new DBStockManagerEntities();
-
+        private DBStockManagerEntities2 db = new DBStockManagerEntities2();
+        [ValidateSession]
         // GET: OrderProducts
         public ActionResult Index()
         {

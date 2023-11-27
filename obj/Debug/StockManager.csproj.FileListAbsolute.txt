@@ -1,3 +1,5 @@
+D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\obj\Debug\StockManager.csproj.AssemblyReference.cache
+D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\obj\Debug\StockManager.csproj.CoreCompileInputs.cache
 D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\bin\StockManager.dll.config
 D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\bin\StockManager.dll
 D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\bin\StockManager.pdb
@@ -83,8 +85,6 @@ D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\bin\es\System
 D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\bin\es\System.Web.WebPages.resources.dll
 D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\obj\Debug\StockManager.csproj.AssemblyReference.cache
-D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\obj\Debug\StockManager.csproj.CoreCompileInputs.cache
 D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\obj\Debug\StockManager.csproj.CopyComplete
 D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\obj\Debug\StockManager.dll
 D:\Proyectos\Visual Studio Community\Programacion Web\StockManager\obj\Debug\StockManager.pdb

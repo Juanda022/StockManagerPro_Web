@@ -14,19 +14,11 @@ namespace StockManager.Models
     
     public partial class OrderProducts
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OrderProducts()
-        {
-            this.Purchases = new HashSet<Purchases>();
-        }
-    
         public int OrderProductsID { get; set; }
         public Nullable<int> ProductID { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
     
         public virtual Product Product { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Purchases> Purchases { get; set; }
     }
 }

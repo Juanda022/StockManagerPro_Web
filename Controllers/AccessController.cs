@@ -14,7 +14,7 @@ namespace StockManagerPro_Web.Controllers
 {
     public class AccessController : Controller
     {
-        private DBStockManagerEntities db = new DBStockManagerEntities();
+        private DBStockManagerEntities2 db = new DBStockManagerEntities2();
         // GET: Access
 
         public ActionResult Login()

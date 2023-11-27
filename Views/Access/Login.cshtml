@@ -1,0 +1,29 @@
+﻿@model StockManager.Models.Users
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' />
+    <link rel="stylesheet" href="~/Content/login.css" />
+    <title>Login</title>
+</head>
+<body>
+    <article class="login">
+        <img src="~/Images/profile.png" alt="profile">
+        <h3>Welcome</h3>
+        <h2>User</h2>
+        <form class="form" action="@Url.Action("Login","Access")" method="post">
+            <input type="text" placeholder="Enter your User" name="UserID" />
+            <input type="password" placeholder="Enter your password" name="Password" />
+            <button type="submit">LOGIN</button>
+            <a href="@Url.Action("Register","Access")">It's not registered?</a>
+        </form>
+    </article>
+</body>
+</html>
+

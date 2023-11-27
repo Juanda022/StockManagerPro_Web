@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBStockManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__CustomerI__4BAC3F29" FromRole="Customer" ToRole="Sales" />
+  </EntityType>
+  <EntityType Name="EdibleMovements">
+    <Key>
+      <PropertyRef Name="MovementID" />
+    </Key>
+    <Property Name="MovementID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="MovementType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="DateTime" Type="DateTime" Precision="3" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__EdibleMov__Emplo__5165187F" FromRole="EdibleMovements" ToRole="Employee" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__EdibleMov__Produ__5070F446" FromRole="EdibleMovements" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="EdibleMovements" Relationship="Self.FK__EdibleMov__Emplo__5165187F" FromRole="Employee" ToRole="EdibleMovements" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Employee__UserID__38996AB5" FromRole="Employee" ToRole="Users" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchases__Emplo__45F365D3" FromRole="Employee" ToRole="Purchases" />
+    <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__EmployeeI__4D94879B" FromRole="Employee" ToRole="Sales" />
+  </EntityType>
+  <EntityType Name="OrderProducts">
+    <Key>
+      <PropertyRef Name="OrderProductsID" />
+    </Key>
+    <Property Name="OrderProductsID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OrderProd__Produ__412EB0B6" FromRole="OrderProducts" ToRole="Product" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchases__Order__44FF419A" FromRole="OrderProducts" ToRole="Purchases" />
+  </EntityType>
+  <EntityType Name="OrderProductsSale">
+    <Key>
+      <PropertyRef Name="OrderProductsSaleID" />
+    </Key>
+    <Property Name="OrderProductsSaleID" Type="Int32" Nullable="false" />
+    <Property Name="OrderID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OrderProd__Produ__48CFD27E" FromRole="OrderProductsSale" ToRole="Product" />
+    <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__OrderProd__4CA06362" FromRole="OrderProductsSale" ToRole="Sales" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="EdibleMovements" Relationship="Self.FK__EdibleMov__Produ__5070F446" FromRole="Product" ToRole="EdibleMovements" />
+    <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__Produ__412EB0B6" FromRole="Product" ToRole="OrderProducts" />
+    <NavigationProperty Name="OrderProductsSale" Relationship="Self.FK__OrderProd__Produ__48CFD27E" FromRole="Product" ToRole="OrderProductsSale" />
+  </EntityType>
+  <EntityType Name="Purchases">
+    <Key>
+      <PropertyRef Name="PurchaseID" />
+    </Key>
+    <Property Name="PurchaseID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierID" Type="Int32" />
+    <Property Name="OrderProductsID" Type="Int32" Nullable="false" />
+    <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Purchases__Emplo__45F365D3" FromRole="Purchases" ToRole="Employee" />
+    <NavigationProperty Name="OrderProducts" Relationship="Self.FK__Purchases__Order__44FF419A" FromRole="Purchases" ToRole="OrderProducts" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK__Purchases__Suppl__440B1D61" FromRole="Purchases" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Sales">
+    <Key>
+      <PropertyRef Name="SaleID" />
+    </Key>
+    <Property Name="SaleID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="OrderProductsSaleID" Type="Int32" Nullable="false" />
+    <Property Name="SaleDate" Type="DateTime" Precision="0" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Sales__CustomerI__4BAC3F29" FromRole="Sales" ToRole="Customer" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Sales__EmployeeI__4D94879B" FromRole="Sales" ToRole="Employee" />
+    <NavigationProperty Name="OrderProductsSale" Relationship="Self.FK__Sales__OrderProd__4CA06362" FromRole="Sales" ToRole="OrderProductsSale" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchases__Suppl__440B1D61" FromRole="Supplier" ToRole="Purchases" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__UserID__38996AB5" FromRole="Users" ToRole="Employee" />
+  </EntityType>
+  <Association Name="FK__Sales__CustomerI__4BAC3F29">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EdibleMov__Emplo__5165187F">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="EdibleMovements" Type="Self.EdibleMovements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="EdibleMovements">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EdibleMov__Produ__5070F446">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="EdibleMovements" Type="Self.EdibleMovements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="EdibleMovements">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__UserID__38996AB5">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Purchases__Emplo__45F365D3">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sales__EmployeeI__4D94879B">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Produ__412EB0B6">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderProducts" Type="Self.OrderProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderProducts">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Purchases__Order__44FF419A">
+    <End Role="OrderProducts" Type="Self.OrderProducts" Multiplicity="1" />
+    <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderProducts">
+        <PropertyRef Name="OrderProductsID" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="OrderProductsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Produ__48CFD27E">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderProductsSale" Type="Self.OrderProductsSale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderProductsSale">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sales__OrderProd__4CA06362">
+    <End Role="OrderProductsSale" Type="Self.OrderProductsSale" Multiplicity="1" />
+    <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderProductsSale">
+        <PropertyRef Name="OrderProductsSaleID" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="OrderProductsSaleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Purchases__Suppl__440B1D61">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBStockManagerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customer" EntityType="Self.Customer" />
+    <EntitySet Name="EdibleMovements" EntityType="Self.EdibleMovements" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" />
+    <EntitySet Name="OrderProducts" EntityType="Self.OrderProducts" />
+    <EntitySet Name="OrderProductsSale" EntityType="Self.OrderProductsSale" />
+    <EntitySet Name="Product" EntityType="Self.Product" />
+    <EntitySet Name="Purchases" EntityType="Self.Purchases" />
+    <EntitySet Name="Sales" EntityType="Self.Sales" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK__Sales__CustomerI__4BAC3F29" Association="Self.FK__Sales__CustomerI__4BAC3F29">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EdibleMov__Emplo__5165187F" Association="Self.FK__EdibleMov__Emplo__5165187F">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EdibleMovements" EntitySet="EdibleMovements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EdibleMov__Produ__5070F446" Association="Self.FK__EdibleMov__Produ__5070F446">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="EdibleMovements" EntitySet="EdibleMovements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__UserID__38996AB5" Association="Self.FK__Employee__UserID__38996AB5">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Purchases__Emplo__45F365D3" Association="Self.FK__Purchases__Emplo__45F365D3">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sales__EmployeeI__4D94879B" Association="Self.FK__Sales__EmployeeI__4D94879B">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Produ__412EB0B6" Association="Self.FK__OrderProd__Produ__412EB0B6">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderProducts" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Purchases__Order__44FF419A" Association="Self.FK__Purchases__Order__44FF419A">
+      <End Role="OrderProducts" EntitySet="OrderProducts" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Produ__48CFD27E" Association="Self.FK__OrderProd__Produ__48CFD27E">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderProductsSale" EntitySet="OrderProductsSale" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sales__OrderProd__4CA06362" Association="Self.FK__Sales__OrderProd__4CA06362">
+      <End Role="OrderProductsSale" EntitySet="OrderProductsSale" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Purchases__Suppl__440B1D61" Association="Self.FK__Purchases__Suppl__440B1D61">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

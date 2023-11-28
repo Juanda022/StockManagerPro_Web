@@ -4,33 +4,31 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="text-center mb-4">Movimientos</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MovementType)
+
+<table class="table table-hover">
+    <tr class="text-center bg-dark">
+        <th class="text-white">
+            MOVIMIENTO
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
+        <th class="text-white">
+            CANTIDAD
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateTime)
+        <th class="text-white">
+            FECHA Y HORA
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Employee.Name)
+        <th class="text-white">
+            PRODUCTO
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Product.Name)
+        <th class="text-white">
+            EMPLEADO
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr class="text-center">
         <td>
             @Html.DisplayFor(modelItem => item.MovementType)
         </td>
@@ -41,17 +39,20 @@
             @Html.DisplayFor(modelItem => item.DateTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Employee.Name)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Product.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MovementID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MovementID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MovementID })
+            @Html.DisplayFor(modelItem => item.Employee.Name)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", new { id = item.MovementID })" class="btn btn-outline-secondary">&#9999</a>
+            <a href="@Url.Action("Details", new { id = item.MovementID })" class="btn btn-outline-info text-white">&#128269</a>
+            <a href="@Url.Action("Delete", new { id = item.MovementID })" class="btn btn-outline-danger">&#10060</a>
         </td>
     </tr>
 }
 
 </table>
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success">Crear</a>
+</p>

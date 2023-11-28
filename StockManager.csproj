@@ -372,6 +372,7 @@
     <Content Include="Views\Access\Register.cshtml" />
     <Content Include="Views\Home\WithoutPermission.cshtml" />
     <Content Include="Views\ReporteVentas\VistaVentas.cshtml" />
+    <Content Include="Views\Graphics\Graphic.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

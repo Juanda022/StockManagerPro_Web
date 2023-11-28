@@ -1,0 +1,71 @@
+﻿@model IEnumerable<StockManager.Models.Sales>
+
+@{
+    ViewBag.Title = "VistaVentas";
+}
+
+<h2>VistaVentas</h2>
+
+@using(Html.BeginForm("VistaVentas", "ReporteVentas", FormMethod.Get))
+{
+    <div>
+        <label for="FechaInicio">Fecha de Inicio:</label>
+        <input type="date" id="FechaInicio" name="fechaInicio">
+        <label for="FechaFin">Fecha de Fin:</label>
+        <input type="date" id="FechaFin" name="fechaFin">
+        <button type="submit">Filtrar</button>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            FECHA
+        </th>
+        <th>
+            TOTAL
+        </th>
+        <th>
+            CLIENTE
+        </th>
+        <th>
+            EMPLEADO
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.Name)
+        </td>
+    </tr>
+}
+
+</table>
+<div style="padding:10px;border:1px solid black">
+    <div>
+        <a href="@Url.Action("VistaReporteVentas", new { id = "pdf" })">
+            Reporte PDF
+        </a>
+    </div>
+    <div>
+        <a href="@Url.Action("VistaReporteVentas", new { id = "Excel" })">
+            Reporte EXCEL
+        </a>
+    </div>
+    <div>
+        <a href="@Url.Action("VistaReporteVentas", new { id = "Word" })">
+            Reporte WORD
+        </a>
+    </div>
+</div>

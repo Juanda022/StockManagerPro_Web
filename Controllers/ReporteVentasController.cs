@@ -1,44 +1,41 @@
-﻿using System;
+﻿using Microsoft.Reporting.WebForms;
+using StockManager.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-//using Microsoft.Reporting.WebForms;
-using StockManager.Models;
-//using StockManager.Models.Permissions;
 
-
-namespace StockManagerPro_Web.Controllers
+namespace StockManager.Controllers
 {
     public class ReporteVentasController : Controller
     {
-        /*DBStockManagerEntities2 dbdatos = new DBStockManagerEntities2();
-        public ActionResult VistaVentas(DateTime? fechaInicio, DateTime? fechaFin)
+        DBStockManagerEntities2 bddatos = new DBStockManagerEntities2();
+        public ActionResult VistaVentas(DateTime ? fechaInicio, DateTime ? fechaFin)
         {
-            LocalReport reporte = new LocalReport();
-            IQueryable<Sales> ventas = dbdatos.Sales.AsQueryable();
+            IQueryable<Sales> ventas = bddatos.Sales.AsQueryable();
 
             if (fechaInicio.HasValue)
             {
-                ventas = ventas.Where(v => v.SaleDate >= fechaInicio.Value);
+                ventas = ventas.Where(v => v.SaleDate == fechaInicio.Value);
             }
 
             if (fechaFin.HasValue)
             {
                 ventas = ventas.Where(v => v.SaleDate <= fechaFin.Value);
             }
+
             return View(ventas.ToList());
         }
-
-        public ActionResult VistaReporteClientes(string id, DateTime? fechaInicio, DateTime? fechaFin)
+        public ActionResult VistaReporteVentas(string id)
         {
             LocalReport reporte = new LocalReport();
             string ruta = Path.Combine(Server.MapPath("~/Informes"),
            "ReporteVentas.rdlc");
             reporte.ReportPath = ruta;
             List<Sales> listado = new List<Sales>();
-            listado = dbdatos.Sales.ToList();
+            listado = bddatos.Sales.ToList();
             ReportDataSource verreporte = new ReportDataSource("Reporte_de_Ventas",
            listado);
             reporte.DataSources.Add(verreporte);
@@ -59,6 +56,6 @@ namespace StockManagerPro_Web.Controllers
             byte[] enviar = reporte.Render(id, dispositivo, out mime,
            out codificacion, out archivo, out flujo, out aviso);
             return File(enviar, mime);
-        }*/
+        }
     }
 }

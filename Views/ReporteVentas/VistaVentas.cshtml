@@ -4,11 +4,11 @@
     ViewBag.Title = "VistaVentas";
 }
 
-<h2>VistaVentas</h2>
+<h2 class="text-center mb-4">Reporte de Ventas</h2>
 
 @using(Html.BeginForm("VistaVentas", "ReporteVentas", FormMethod.Get))
 {
-    <div>
+    <div class="mb-4">
         <label for="FechaInicio">Fecha de Inicio:</label>
         <input type="date" id="FechaInicio" name="fechaInicio">
         <label for="FechaFin">Fecha de Fin:</label>
@@ -17,25 +17,25 @@
     </div>
 }
 
-<table class="table">
-    <tr>
-        <th>
+<table class="table table-hover">
+    <tr class="text-center bg-dark">
+        <th class="text-white">
             FECHA
         </th>
-        <th>
+        <th class="text-white">
             TOTAL
         </th>
-        <th>
+        <th class="text-white">
             CLIENTE
         </th>
-        <th>
+        <th class="text-white">
             EMPLEADO
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr class="text-center">
         <td>
             @Html.DisplayFor(modelItem => item.SaleDate)
         </td>
@@ -52,20 +52,14 @@
 }
 
 </table>
-<div style="padding:10px;border:1px solid black">
-    <div>
-        <a href="@Url.Action("VistaReporteVentas", new { id = "pdf" })">
-            Reporte PDF
-        </a>
-    </div>
-    <div>
-        <a href="@Url.Action("VistaReporteVentas", new { id = "Excel" })">
-            Reporte EXCEL
-        </a>
-    </div>
-    <div>
-        <a href="@Url.Action("VistaReporteVentas", new { id = "Word" })">
-            Reporte WORD
-        </a>
-    </div>
+<div class="mb-3">
+    <a class="btn btn-outline-danger" href="@Url.Action("VistaReporteVentas", new { id = "pdf" })">
+        &#128196;
+    </a>
+    <a class="btn btn-outline-success" href="@Url.Action("VistaReporteVentas", new { id = "Excel" })">
+        &#128202;
+    </a>
+    <a class="btn btn-outline-primary" href="@Url.Action("VistaReporteVentas", new { id = "Word" })">
+        &#128221;
+    </a>
 </div>

@@ -4,30 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<h2 class="text-center mb-4">Index</h2>
+<h2 class="text-center mb-4">Compras</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PurchaseDate)
+
+<table class="table table-hover">
+    <tr class="text-center bg-dark">
+        <th class="text-white">
+            FECHA
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalAmount)
+        <th class="text-white">
+            TOTAL
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Employee.Name)
+        <th class="text-white">
+            EMPLEADO
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Supplier.Name)
+        <th class="text-white">
+            DISTRIBUIDOR
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr class="text-center">
         <td>
             @Html.DisplayFor(modelItem => item.PurchaseDate)
         </td>
@@ -41,11 +39,14 @@
             @Html.DisplayFor(modelItem => item.Supplier.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PurchaseID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PurchaseID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PurchaseID })
+            <a href="@Url.Action("Edit", new { id = item.PurchaseID })" class="btn btn-outline-secondary">&#9999</a>
+            <a href="@Url.Action("Details", new { id = item.PurchaseID })" class="btn btn-outline-info text-white">&#128269</a>
+            <a href="@Url.Action("Delete", new { id = item.PurchaseID })" class="btn btn-outline-danger">&#10060</a>
         </td>
     </tr>
 }
 
 </table>
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success">Crear</a>
+</p>

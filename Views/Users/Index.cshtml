@@ -4,24 +4,22 @@
     ViewBag.Title = "Index";
 }
 
-<h2 class="text-center mb-4">Index</h2>
+<h2 class="text-center mb-4">Usuarios</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
+
+<table class="table table-hover">
+    <tr class="text-center bg-dark">
+        <th class="text-white">
+            CONTRASEÑA
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Role)
+        <th class="text-white">
+            ROL
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr class="text-center">
         <td>
             @Html.DisplayFor(modelItem => item.Password)
         </td>
@@ -29,11 +27,14 @@
             @Html.DisplayFor(modelItem => item.Role)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserID })
+            <a href="@Url.Action("Edit", new { id = item.UserID })" class="btn btn-outline-secondary">&#9999</a>
+            <a href="@Url.Action("Details", new { id = item.UserID })" class="btn btn-outline-info text-white">&#128269</a>
+            <a href="@Url.Action("Delete", new { id = item.UserID })" class="btn btn-outline-danger">&#10060</a>
         </td>
     </tr>
 }
 
 </table>
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success">Crear</a>
+</p>

@@ -4,33 +4,31 @@
     ViewBag.Title = "Index";
 }
 
-<h2 class="text-center mb-4">Index</h2>
+<h2 class="text-center mb-4">Ordenes de Ventas</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 @using (Html.BeginForm("UpdateSales", "OrderProductsSales", FormMethod.Post))
 {
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderID)
+    <table class="table table-hover">
+        <tr class="text-center bg-dark">
+            <th class="text-white">
+                ORDEN ID
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
+            <th class="text-white">
+                CANTIDAD
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
+            <th class="text-white">
+                PRECIO UNITARIO
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product.Name)
+            <th class="text-white">
+                PRODUCTO
             </th>
             <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="text-center">
                 <td>
                     @Html.DisplayFor(modelItem => item.OrderID)
                 </td>
@@ -44,15 +42,18 @@
                     @Html.DisplayFor(modelItem => item.Product.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.OrderProductsSaleID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.OrderProductsSaleID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.OrderProductsSaleID })
+                    <a href="@Url.Action("Edit", new { id = item.OrderProductsSaleID })" class="btn btn-outline-secondary">&#9999</a>
+                    <a href="@Url.Action("Details", new { id = item.OrderProductsSaleID })" class="btn btn-outline-info text-white">&#128269</a>
+                    <a href="@Url.Action("Delete", new { id = item.OrderProductsSaleID })" class="btn btn-outline-danger">&#10060</a>
                     <input type="checkbox" name="orderProductIds" value="@item.OrderProductsSaleID" />
                 </td>
             </tr>
         }
 
     </table>
+    <p>
+        <a href="@Url.Action("Create")" class="btn btn-success">Crear</a>
+    </p>
 
     <div>
         <label for="purchaseId">Sale ID:</label>

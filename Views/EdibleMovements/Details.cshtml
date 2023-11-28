@@ -53,6 +53,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MovementID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Edit", new { id = Model.MovementID })" class="btn btn-primary">Editar</a>
+    <a href="@Url.Action("Index")" class="btn btn-dark" role="button">Volver</a>
 </p>

@@ -4,31 +4,29 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="text-center mb-4">Productos</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
+
+<table class="table table-hover">
+    <tr class="text-center bg-dark">
+        <th class="text-white">
+            PRODUCTO
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
+        <th class="text-white">
+            DESCRIPCIÓN
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
+        <th class="text-white">
+            PRECIO
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
+        <th class="text-white">
+            CANTIDAD
         </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="text-center">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -42,22 +40,27 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                <a href="@Url.Action("Edit", new { id = item.ProductID })" class="btn btn-outline-secondary">&#9999</a>
+                <a href="@Url.Action("Details", new { id = item.ProductID })" class="btn btn-outline-info text-white">&#128269</a>
+                <a href="@Url.Action("Delete", new { id = item.ProductID })" class="btn btn-outline-danger">&#10060</a>
             </td>
         </tr>
     }
 
 </table>
 
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success">Crear</a>
+</p>
+
 @using (Html.BeginForm("GraphicViewParameter", "Graphics", FormMethod.Post))
 {
-    <div style="padding:10px; border:1px solid black">
+    <hr/>
+    <div class="mb-4 border-1">
         <div>
             <label for="selectedOption">Seleccione una opción:</label>
             @Html.DropDownList("selectedOption", new SelectList(new[] { "Valor", "Cantidad" }))
-            <input type="submit" value="Ir a Vista" />
+            <input class=" btn btn-success" type="submit" value="Ir a Vista" />
         </div>
     </div>
 }

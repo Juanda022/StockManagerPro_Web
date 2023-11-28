@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using StockManager.Models;
 using StockManagerPro_Web.Permissions;
@@ -139,6 +141,27 @@ namespace StockManager.Controllers
             }
             ViewBag.ProductID = new SelectList(db.Product, "ProductID", "Name", orderProducts.ProductID);
             return View(orderProducts);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdatePurchases(int purchaseID, int[] orderProductIds)
+        {
+            decimal totalAmount = (decimal)db.OrderProducts
+            .Where(op => orderProductIds.Contains(op.OrderProductsID))
+            .Sum(op => op.Quantity * op.UnitPrice);
+
+            // Actualiza la Purchase con PurchaseID 7
+            var purchaseToUpdate = db.Purchases.SingleOrDefault(p => p.PurchaseID == purchaseID);
+
+            if (purchaseToUpdate != null)
+            {
+                purchaseToUpdate.TotalAmount = totalAmount;
+                db.SaveChanges();
+            }
+
+            // Redirige o realiza alguna acción después de la actualización
+            return RedirectToAction("Index", "Purchases"); // Puedes cambiar esto según tu lógica
         }
 
         // GET: OrderProducts/Delete/5

@@ -17,13 +17,26 @@ namespace StockManagerPro_Web.Controllers
             return View();
         }
 
-        public ActionResult GraphicView()
-        {
+         public ActionResult GraphicView()
+         {
             ArrayList xValues = new ArrayList();
             ArrayList yValues = new ArrayList();
             var result = graphicDB.Product.ToList();
             result.ToList().ForEach(rs => xValues.Add(rs.Name));
             result.ToList().ForEach(rs => yValues.Add(rs.UnitPrice));
+            var graphic = new System.Web.Helpers.Chart(width: 500, height: 600)
+            .AddTitle("Ventas")
+            .AddSeries(chartType: "Bar", name: "Barras", xValue: xValues, yValues: yValues);
+            return File(graphic.GetBytes("png"), "Image/png");
+        }
+        public ActionResult GraphicViewParameter(string parameter)
+        {
+
+            ArrayList xValues = new ArrayList();
+            ArrayList yValues = new ArrayList();
+            var result = graphicDB.Product.ToList();
+            result.ToList().ForEach(rs => xValues.Add(rs.Name));
+            result.ToList().ForEach(rs => yValues.Add(rs.Quantity));
             var graphic = new System.Web.Helpers.Chart(width: 500, height: 600)
             .AddTitle("Ventas")
             .AddSeries(chartType: "Bar", name: "Barras", xValue: xValues, yValues: yValues);

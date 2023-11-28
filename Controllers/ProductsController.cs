@@ -35,6 +35,21 @@ namespace StockManager.Controllers
             return View(product);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SelectOption(string selectedOption)
+        {
+            if (selectedOption == "Opcion1")
+            {
+                return RedirectToAction("Graphic", "Graphics");
+            }
+            else if (selectedOption == "Opcion2")
+            {
+                return RedirectToAction("GraphicViewParameter","Graphics");
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
         // GET: Products/Create
         public ActionResult Create()
         {

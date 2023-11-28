@@ -11,7 +11,7 @@ namespace StockManager.Controllers
 {
     public class ReporteVentasController : Controller
     {
-        DBStockManagerEntities2 bddatos = new DBStockManagerEntities2();
+        DBStockManagerEntities3 bddatos = new DBStockManagerEntities3();
         public ActionResult VistaVentas(DateTime ? fechaInicio, DateTime ? fechaFin)
         {
             IQueryable<Sales> ventas = bddatos.Sales.AsQueryable();

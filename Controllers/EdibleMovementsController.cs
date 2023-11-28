@@ -13,7 +13,7 @@ namespace StockManager.Controllers
 {
     public class EdibleMovementsController : Controller
     {
-        private DBStockManagerEntities2 db = new DBStockManagerEntities2();
+        private DBStockManagerEntities3 db = new DBStockManagerEntities3();
         [ValidateSession]
         // GET: EdibleMovements
         public ActionResult Index()

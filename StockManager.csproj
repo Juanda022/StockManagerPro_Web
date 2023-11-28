@@ -262,13 +262,6 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\ModelDB_StockManager.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelDB_StockManager.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelDB_StockManager.edmx.diagram">
-      <DependentUpon>ModelDB_StockManager.edmx</DependentUpon>
-    </Content>
     <Content Include="DatosVentas.xsc">
       <DependentUpon>DatosVentas.xsd</DependentUpon>
     </Content>
@@ -279,6 +272,13 @@
     </None>
     <Content Include="DatosVentas.xss">
       <DependentUpon>DatosVentas.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\ModelDB_StockManager.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelDB_StockManager.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelDB_StockManager.edmx.diagram">
+      <DependentUpon>ModelDB_StockManager.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

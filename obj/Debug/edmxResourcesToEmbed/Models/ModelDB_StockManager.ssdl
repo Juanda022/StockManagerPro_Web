@@ -58,6 +58,7 @@
     <Property Name="Name" Type="varchar" MaxLength="100" />
     <Property Name="Description" Type="varchar" MaxLength="255" />
     <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Quantity" Type="int" />
   </EntityType>
   <EntityType Name="Purchases">
     <Key>

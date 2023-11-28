@@ -13,7 +13,7 @@ namespace StockManager.Controllers
 {
     public class OrderProductsSalesController : Controller
     {
-        private DBStockManagerEntities2 db = new DBStockManagerEntities2();
+        private DBStockManagerEntities3 db = new DBStockManagerEntities3();
         [ValidateSession]
         // GET: OrderProductsSales
         public ActionResult Index()
@@ -53,9 +53,50 @@ namespace StockManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.OrderProductsSale.Add(orderProductsSale);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                using (var dbContextTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        int userId = Convert.ToInt32(Session["userID"]);
+                        int lastMovementId = db.EdibleMovements.Max(e => (int?)e.MovementID) ?? 0;
+                        db.OrderProductsSale.Add(orderProductsSale);
+                        db.SaveChanges();
+
+                        int orderProductId = orderProductsSale.OrderProductsSaleID;
+
+                        // Paso 3: Insertar en la tabla EdibleMovements
+                        EdibleMovements edibleMovement = new EdibleMovements
+                        {
+                            MovementID = lastMovementId + 1,
+                            ProductID = orderProductsSale.ProductID,
+                            MovementType = "Salida", // Ajusta según tu lógica
+                            Quantity = orderProductsSale.Quantity,
+                            DateTime = DateTime.Now, // O ajusta según tus necesidades
+                            EmployeeID = userId // Asigna el ID del empleado apropiado
+                        };
+                        db.EdibleMovements.Add(edibleMovement);
+                        db.SaveChanges();
+
+                        Product product = db.Product.Find(orderProductsSale.ProductID);
+
+                        if (product != null)
+                        {
+                            // Actualizar la cantidad en existencia restando la cantidad de salida
+                            product.Quantity -= orderProductsSale.Quantity;
+
+                            // Guardar los cambios en la tabla Inventory
+                            db.SaveChanges();
+                        }
+
+                        dbContextTransaction.Commit();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception)
+                    {
+                        dbContextTransaction.Rollback();
+                        throw;
+                    }
+                }
             }
 
             ViewBag.ProductID = new SelectList(db.Product, "ProductID", "Name", orderProductsSale.ProductID);

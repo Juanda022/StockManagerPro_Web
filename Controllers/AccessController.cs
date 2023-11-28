@@ -14,7 +14,7 @@ namespace StockManagerPro_Web.Controllers
 {
     public class AccessController : Controller
     {
-        private DBStockManagerEntities2 db = new DBStockManagerEntities2();
+        private DBStockManagerEntities3 db = new DBStockManagerEntities3();
         // GET: Access
 
         public ActionResult Login()
@@ -33,6 +33,7 @@ namespace StockManagerPro_Web.Controllers
             if (users != null)
             {
                 Session["user"] = users;
+                Session["userID"] = users.UserID;
                 return RedirectToAction("Index", "Home");
             }
             else

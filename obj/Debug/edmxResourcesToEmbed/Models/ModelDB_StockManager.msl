@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DBStockManagerModelStoreContainer" CdmEntityContainer="DBStockManagerEntities2">
+  <EntityContainerMapping StorageEntityContainer="DBStockManagerModelStoreContainer" CdmEntityContainer="DBStockManagerEntities3">
     <EntitySetMapping Name="Customer">
       <EntityTypeMapping TypeName="DBStockManagerModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
@@ -63,6 +63,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

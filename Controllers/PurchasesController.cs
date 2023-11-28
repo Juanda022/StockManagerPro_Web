@@ -12,7 +12,7 @@ namespace StockManager.Controllers
 {
     public class PurchasesController : Controller
     {
-        private DBStockManagerEntities2 db = new DBStockManagerEntities2();
+        private DBStockManagerEntities3 db = new DBStockManagerEntities3();
 
         // GET: Purchases
         public ActionResult Index()

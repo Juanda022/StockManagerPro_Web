@@ -26,6 +26,7 @@ namespace StockManager.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EdibleMovements> EdibleMovements { get; set; }

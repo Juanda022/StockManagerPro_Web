@@ -7,14 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StockManager.Models;
-using StockManagerPro_Web.Permissions;
 
 namespace StockManager.Controllers
 {
     public class ProductsController : Controller
     {
-        private DBStockManagerEntities2 db = new DBStockManagerEntities2();
-        [ValidateSession]
+        private DBStockManagerEntities3 db = new DBStockManagerEntities3();
+
         // GET: Products
         public ActionResult Index()
         {
@@ -47,7 +46,7 @@ namespace StockManager.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,Description,UnitPrice")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,Name,Description,UnitPrice,Quantity")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +78,7 @@ namespace StockManager.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,Description,UnitPrice")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,Name,Description,UnitPrice,Quantity")] Product product)
         {
             if (ModelState.IsValid)
             {

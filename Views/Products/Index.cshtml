@@ -26,32 +26,38 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+            </td>
+        </tr>
+    }
 
 </table>
 
-<div style="padding:10px;border:1px solid black">
-    <div>
-        @Html.ActionLink("Grafica", "Graphic", "Graphics", new { area = "" }, new { @href = "/Graphics/Graphic" })
+@using (Html.BeginForm("GraphicViewParameter", "Graphics", FormMethod.Post))
+{
+    <div style="padding:10px; border:1px solid black">
+        <div>
+            <label for="selectedOption">Seleccione una opción:</label>
+            @Html.DropDownList("selectedOption", new SelectList(new[] { "Valor", "Cantidad" }))
+            <input type="submit" value="Ir a Vista" />
+        </div>
     </div>
-</div>
+}

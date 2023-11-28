@@ -6,41 +6,52 @@
 
 <h2 class="text-center mb-4">Ordenes de Productos</h2>
 
+@using (Html.BeginForm("UpdatePurchases", "OrderProducts", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <table class="table table-hover">
+        <tr class="text-center bg-dark">
+            <th class="text-white">
+                CANTIDAD
+            </th>
+            <th class="text-white">
+                PRECIO
+            </th>
+            <th class="text-white">
+                NOMBRE
+            </th>
+            <th></th>
+        </tr>
 
-<table class="table table-hover">
-    <tr class="text-center bg-dark">
-        <th class="text-white">
-            CANTIDAD
-        </th>
-        <th class="text-white">
-            PRECIO
-        </th>
-        <th class="text-white">
-            NOMBRE
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr class="text-center">
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.Name)
-        </td>
-        <td>
-            <a href="@Url.Action("Edit", new { id = item.OrderProductsID })" class="btn btn-outline-secondary">&#9999</a>
-            <a href="@Url.Action("Details", new { id = item.OrderProductsID })" class="btn btn-outline-info text-white">&#128269</a>
-            <a href="@Url.Action("Delete", new { id = item.OrderProductsID })" class="btn btn-outline-danger">&#10060</a>
-        </td>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.OrderProductsID })" class="btn btn-outline-secondary">&#9999</a>
+                    <a href="@Url.Action("Details", new { id = item.OrderProductsID })" class="btn btn-outline-info text-white">&#128269</a>
+                    <a href="@Url.Action("Delete", new { id = item.OrderProductsID })" class="btn btn-outline-danger">&#10060</a>
+                    <input type="checkbox" name="orderProductIds" value="@item.OrderProductsID" />
+                </td>
+            </tr>
+        }
+
+    </table>
+    <p>
+        <a href="@Url.Action("Create")" class="btn btn-success">Crear</a>
+    </p>
+    <div>
+        <label for="purchaseId">Purchase ID:</label>
+        @Html.TextBox("purchaseID", null, new { @class = "form-control" })
+    </div>
+    <input type="submit" value="UpdatePurchases" class="btn btn-success" />
 }
-
-</table>
-<p>
-    <a href="@Url.Action("Create")" class="btn btn-success">Crear</a>
-</p>

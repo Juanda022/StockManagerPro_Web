@@ -136,6 +136,26 @@ namespace StockManager.Controllers
             return View(orderProductsSale);
         }
 
+        [HttpPost]
+        public ActionResult UpdateSales(int saleID, int[] orderProductIds)
+        {
+            decimal totalAmount = (decimal)db.OrderProductsSale
+            .Where(op => orderProductIds.Contains(op.OrderProductsSaleID))
+            .Sum(op => op.Quantity * op.UnitPrice);
+
+            // Actualiza la Ssale con SaleID
+            var salesToUpdate = db.Sales.SingleOrDefault(p => p.SaleID == saleID);
+
+            if (salesToUpdate != null)
+            {
+                salesToUpdate.TotalAmount = totalAmount;
+                db.SaveChanges();
+            }
+
+            // Redirige o realiza alguna acción después de la actualización
+            return RedirectToAction("Index", "Sales"); // Puedes cambiar esto según tu lógica
+        }
+
         // GET: OrderProductsSales/Delete/5
         public ActionResult Delete(int? id)
         {
